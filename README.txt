@@ -1,7 +1,7 @@
 Name: Lawynn Jana
 Date: Jan 7, 2019
 
-Knockri Inc Assesment
+Knockri Inc Assessment
 
 This application displays a list of candidates and their application/videos.
 
