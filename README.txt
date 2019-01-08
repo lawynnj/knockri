@@ -14,3 +14,12 @@ Are there any improvements you could make to your submission?
 
 What would you do differently if you were allocated more time?
   I would have researched the json-server API inorder to complete the "Save comment" feature and try to find any areas that needed optimization/refactoring.
+
+Execution
+git clone
+ $ git clone git@github.com:lawynnjana/knockri.git
+ 
+ change directories into knockri and execute npm install in the directory and then in the client/ directory
+ 
+ In the parent folder type:
+ $ npm start 
