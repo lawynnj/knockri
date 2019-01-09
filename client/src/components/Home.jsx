@@ -34,7 +34,8 @@ class Home extends Component {
           </Col>
           <Col 
             xs="12" 
-            md="8">
+            md="8"
+          >
             <Switch>
               {/* render a route for selected candidate */}
               <Route 
@@ -45,17 +46,17 @@ class Home extends Component {
           </Col>
         </Row>
       </Container>
-    )
+    );
   }
-};
+}
 
 Home.propTypes = {
-  candidates: PropTypes.object,
-  applications: PropTypes.object,
-  questions: PropTypes.object,
-  fetchCandidates: PropTypes.func,
-  fetchApplications: PropTypes.func,
-  fetchQuestions: PropTypes.func,
+  candidates: PropTypes.object.isRequired,
+  applications: PropTypes.object.isRequired,
+  questions: PropTypes.object.isRequired,
+  fetchCandidates: PropTypes.func.isRequired,
+  fetchApplications: PropTypes.func.isRequired,
+  fetchQuestions: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = ({ candidates, applications, questions }) => ({ 

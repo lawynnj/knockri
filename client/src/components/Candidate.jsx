@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { connect } from 'react-redux';
 
@@ -10,20 +11,20 @@ class Candidate extends Component {
     super(props);
     this.state = {
       windowWid: 0,
-    }
+    };
   }
 
   componentDidMount() {
-    this.setState({ windowWid: window.innerWidth})
-    window.addEventListener("resize", this.updateDimensions);
+    this.setState({ windowWid: window.innerWidth});
+    window.addEventListener('resize', this.updateDimensions);
   }
 
   componentWillUnmount() {
-    window.removeEventListener("resize", this.updateDimensions);
-}
+    window.removeEventListener('resize', this.updateDimensions);
+  }
 
   updateDimensions = () => {
-    this.setState({ windowWid: window.innerWidth})
+    this.setState({ windowWid: window.innerWidth});
   }
 
   onSaveClick = (appId, questionId, comment) => {
@@ -44,26 +45,36 @@ class Candidate extends Component {
     return (
       <div>
         <h2>
-          Name: {candidate.name}
+          Name: 
+          {' '}
+          {candidate.name}
         </h2>
         <div style={{ height: '90vh', overflow:'auto'}}>
           { /* display videos if the user has an application */}
           { 
-            candidate.applicationId ? 
+            candidate.applicationId ? (
               <VideoList 
                 appId={candidate.applicationId} 
                 width={windowWid} 
                 applications={applications} 
                 questions={questions} 
-                onSaveClick={this.onSaveClick} 
-              /> 
-            : 
-             "The candidate does not have an application!" 
-            }
+                onSaveClick={this.onSaveClick}
+              />
+            ): 
+              'The candidate does not have an application!' 
+          }
         </div>
       </div>
-    )
+    );
   }
 }
+
+Candidate.propTypes = {
+  saveComment: PropTypes.func,
+  candidates: PropTypes.object.isRequired,
+  questions: PropTypes.object.isRequired,
+  applications: PropTypes.object.isRequired,
+  match: PropTypes.func.isRequired,
+};
 
 export default connect(null, { saveComment})(Candidate);

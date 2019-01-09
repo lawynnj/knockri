@@ -25,23 +25,24 @@ class Video extends Component {
         {/* Question and Video */}
         <h4>{ question }</h4>
         <video 
-          width={ width }
+          width={width}
           style={{ borderRadius: 10 }} 
           controls
         >
           <source 
             src={src} 
             type="video/mp4"
-          >
-          </source>
+          />
+          
+          <track default kind="captions" />
         </video>
 
         {/* Comment Section */}
         <div>
           <input 
             style={{ width: '70%', padding: 10, borderRadius: 5 }}
-            onChange={ this.updateComment } 
-            value={ comment } 
+            onChange={this.updateComment} 
+            value={comment} 
             placeholder="Comment here..."
           /> 
           <Button 
@@ -53,17 +54,17 @@ class Video extends Component {
           </Button>      
         </div>
       </div>
-    )
+    );
   }
 }
 
 Video.propTypes = {
-  question: PropTypes.string,
-  width: PropTypes.number,
-  src: PropTypes.string,
-  appId: PropTypes.number,
-  questionId: PropTypes.number,
-  onSaveClick: PropTypes.func,
-}
+  question: PropTypes.string.isRequired,
+  width: PropTypes.number.isRequired,
+  src: PropTypes.string.isRequired,
+  appId: PropTypes.number.isRequired,
+  questionId: PropTypes.number.isRequired,
+  onSaveClick: PropTypes.func.isRequired,
+};
 
 export default Video;

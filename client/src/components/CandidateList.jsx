@@ -1,6 +1,6 @@
         
 import React from 'react';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import _ from 'lodash';
 import { ListGroup, ListGroupItem } from 'reactstrap';
@@ -20,11 +20,11 @@ const CandidateList = ({ candidates }) =>{
         })}
       </ListGroup>
     </div>
-    )
-}
+  );
+};
 
 CandidateList.propTypes = {
-  candidates: PropTypes.object,
+  candidates: PropTypes.object.isRequired,
 }
 
 export default CandidateList;

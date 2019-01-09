@@ -1,9 +1,3 @@
-const initState = {
-  isLoading: false,
-  saveSuccess: true,
-  data: {}
-}
-
 export const FETCH_APPLICATIONS_FAIL = 'FETCH_APPLICATIONS_FAIL';
 export const FETCH_APPLICATIONS_REQUEST = 'FETCH_APPLICATIONS_REQUEST';
 export const FETCH_APPLICATIONS_SUCCESS = 'FETCH_APPLICATIONS_SUCCESS';
@@ -20,12 +14,18 @@ const orderById = applications => {
     temp.videos = item.videos.reduce((res, vid) => {
       res[vid.questionId] = vid;
       return res;
-    }, {})
+    }, {});
 
     result[item.id] = temp;
     return result;
-  }, {})
-}
+  }, {});
+};
+
+const initState = {
+  isLoading: false,
+  saveSuccess: true,
+  data: {}
+};
 
 export default function(state = initState, action) {
   switch(action.type) {
@@ -33,37 +33,36 @@ export default function(state = initState, action) {
       return {
         ...state,
         isLoading: true
-      }
+      };
     
     case FETCH_APPLICATIONS_SUCCESS:
       return {
         data: orderById(action.payload),
         isLoading: false
-      }
+      };
     
     case FETCH_APPLICATIONS_FAIL:
       return {
         isLoading: false,
         ...state
-      }
+      };
     
     case SAVE_COMMENT_SUCCESS:
       return {
         ...state,
         saveSuccess: true
-      }
+      };
     
     case SAVE_COMMENT_FAIL:
       return {
         ...state,
         saveSuccess: false,
-      }
+      };
 
     default:
       return state;
   }
 }
-
 
 export const fetchApplications = () => async dispatch => {
   try {
@@ -71,16 +70,16 @@ export const fetchApplications = () => async dispatch => {
     dispatch({ type: FETCH_APPLICATIONS_REQUEST });
     const res = await fetch('http://localhost:3010/applications');
     const data = await res.json();
-    dispatch({ type: FETCH_APPLICATIONS_SUCCESS, payload: data })
+    dispatch({ type: FETCH_APPLICATIONS_SUCCESS, payload: data });
 
   } catch (error) {
     dispatch({ type: FETCH_APPLICATIONS_FAIL });
   }
-}
+};
 
 export const saveComment = (appId, questionId, comment, successCB, failCB) => async (dispatch, getState) => {
   try {
-    dispatch({ type: SAVE_COMMENT_REQUEST })
+    dispatch({ type: SAVE_COMMENT_REQUEST });
     
     // append new comment to existing comments for the video
     const comments = getState().applications.data[appId].videos[questionId].comments;
@@ -90,21 +89,21 @@ export const saveComment = (appId, questionId, comment, successCB, failCB) => as
     const res = await fetch(`http://localhost:3010/applications/${appId}/videos?questionId=${questionId}/comment`, {
       method: 'POST',
       headers: {
-        "Content-type": "text/plain"
+        'Content-type': 'text/plain'
       },
       body: newComments
-    })
+    });
 
     if(res.status === 200 && Response.ok) {
       dispatch({ type: SAVE_COMMENT_SUCCESS });
       successCB();
       return;
     }
-    
-    dispatch({ type: SAVE_COMMENT_FAIL });
+
+    throw new Error('failed to save comments.');    
   
   } catch (error) {
-    dispatch({ type: SAVE_COMMENT_FAIL })
+    dispatch({ type: SAVE_COMMENT_FAIL });
     failCB();    
   }
-}
+};
