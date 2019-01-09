@@ -33,7 +33,6 @@ class Video extends Component {
             src={src} 
             type="video/mp4"
           />
-          
           <track default kind="captions" />
         </video>
 

@@ -22,6 +22,7 @@ class Home extends Component {
   }
 
   render() {
+    const { candidates } = this.props;
     return(
       <Container>
         <Row style={{marginTop: 40}}>
@@ -40,7 +41,7 @@ class Home extends Component {
               {/* render a route for selected candidate */}
               <Route 
                 path="/candidate/:id" 
-                render={(props) => <Candidate {...this.props} {...props} /> } 
+                render={(props) => <Candidate {...this.props} {...props} />} 
               />
             </Switch>
           </Col>
@@ -57,7 +58,7 @@ Home.propTypes = {
   fetchCandidates: PropTypes.func.isRequired,
   fetchApplications: PropTypes.func.isRequired,
   fetchQuestions: PropTypes.func.isRequired,
-}
+};
 
 const mapStateToProps = ({ candidates, applications, questions }) => ({ 
   candidates, 

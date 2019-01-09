@@ -10,8 +10,11 @@ const VideoList = props => {
   const { applications, questions, appId, width, onSaveClick } = props;
 
   // Show loading state
-  if(_.isEmpty(applications.data) || _.isEmpty(questions.data))
+  if(_.isEmpty(applications.data))
     return <div>Loading</div>;
+
+  if(_.isEmpty(questions.data))
+    return null;
 
   const application = applications.data[appId];
   const { videos } = application;

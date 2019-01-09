@@ -39,6 +39,9 @@ class Candidate extends Component {
     const candidate = candidates.data[id];
 
     // show nothing if data is empty / not loaded
+    if(candidates.isLoading)
+      return <div>Loading</div>;
+
     if(_.isEmpty(candidates.data))
       return null;
 
@@ -70,11 +73,11 @@ class Candidate extends Component {
 }
 
 Candidate.propTypes = {
-  saveComment: PropTypes.func,
+  saveComment: PropTypes.func.isRequired,
   candidates: PropTypes.object.isRequired,
   questions: PropTypes.object.isRequired,
   applications: PropTypes.object.isRequired,
-  match: PropTypes.func.isRequired,
+  match: PropTypes.object.isRequired,
 };
 
 export default connect(null, { saveComment})(Candidate);
